@@ -1,0 +1,98 @@
+---
+title: "Data types and structures"
+author: Ralf Ansorg
+date: "`r Sys.Date()`"
+format:
+  typst:
+    template-partials: 
+      - typst-show.typ
+      - typst-template.typ
+echo: true
+results: true
+warning: false
+---
+
+## Exercise 1
+
+Suppose you got the following data or data frame:
+
+```{r}
+#| label: init
+a <- c(1:5) # mouse ID
+b <- c(5, 6, 3, 10, 7) # licks per hours
+c <- c("17.18", "16.03", "15.9", "17.99", "14") # length in cm
+d <- c("Female", "Male", "Male", "Female", "Maile") # sex of mouse
+e <- c(TRUE, FALSE, TRUE, TRUE, FALSE) # healthy mouse
+```
+
+```{r}
+#| label: init-df
+df <- data.frame(a=a, b=b, c=c, d=d, e=e)
+```
+
+1.  Which vectors (or columns of the data frame) need some work-over? If so, please write the correct code (_hint_: try to figure this out by looking at its structure; recall coercion and accessing elements of vectors, and factors. Think about on how to assign new a value to a particular element of a vector, e.g. my_example_vector[5].
+
+```{r}
+#| label: ex1-1a
+class(c)
+c
+```
+
+```{r}
+#| label: ex1-1b
+c <- as.numeric(c)
+c
+class(c)
+```
+
+```{r}
+#| label: ex1-1c
+d[5] <- "Male" # was misspelled as "Maile"
+d <- as.factor(d)
+d
+```
+
+2.  Add all vectors to a new data frame `df_clean` with proper/meaningful headers (instead of a,..., e)
+
+```{r}
+#| label: ex1-2
+df_clean <- data.frame(ID=a, licks=b, length=c, sex=d, healthy=e)
+df_clean
+```
+
+3.  What is the mean of the length of the mice? _Hint_: you could use the `mean()` function. What is the median?
+
+```{r}
+#| label: ex1-3
+mean(df_clean$length)
+median(df_clean$length)
+```
+
+```{r}
+#| label: ex1-3b
+#| echo: false
+#| results: false
+mean <- mean(df_clean$length)
+median <- median(df_clean$length)
+```
+
+> The mean length of the mice is `r mean` and the median is `r median`.[^1]
+
+4.  Look at the structure **and** summary if your cleaned-up data is reasonable and briefly explain why. Bullet points only (use the \* or \- symbol), no essay.
+
+```{r}
+#| label: ex1-4
+str(df)
+summary(df)
+
+str(df_clean)
+summary(df_clean)
+```
+
+## Comments
+
+* length had to be converted to numerical (from character)
+* sex should be a factor
+* factors and logicals are displayed differently (counts)
+
+[^1]: Check the .qmd file on how to have inline code!
