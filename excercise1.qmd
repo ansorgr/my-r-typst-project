@@ -2,6 +2,7 @@
 title: "Data types and structures"
 author: Ralf Ansorg
 date: "`r Sys.Date()`"
+date-format: "DD MMMM YYYY"
 format:
   typst:
     template-partials: 
@@ -12,7 +13,7 @@ results: true
 warning: false
 ---
 
-## Exercise 1
+# Exercise 1
 
 Suppose you got the following data or data frame:
 
@@ -31,6 +32,8 @@ df <- data.frame(a=a, b=b, c=c, d=d, e=e)
 ```
 
 1.  Which vectors (or columns of the data frame) need some work-over? If so, please write the correct code (_hint_: try to figure this out by looking at its structure; recall coercion and accessing elements of vectors, and factors. Think about on how to assign new a value to a particular element of a vector, e.g. my_example_vector[5].
+
+#### Solution
 
 ```{r}
 #| label: ex1-1a
@@ -54,6 +57,8 @@ d
 
 2.  Add all vectors to a new data frame `df_clean` with proper/meaningful headers (instead of a,..., e)
 
+#### Solution
+
 ```{r}
 #| label: ex1-2
 df_clean <- data.frame(ID=a, licks=b, length=c, sex=d, healthy=e)
@@ -61,6 +66,8 @@ df_clean
 ```
 
 3.  What is the mean of the length of the mice? _Hint_: you could use the `mean()` function. What is the median?
+
+#### Solution
 
 ```{r}
 #| label: ex1-3
@@ -80,6 +87,8 @@ median <- median(df_clean$length)
 
 4.  Look at the structure **and** summary if your cleaned-up data is reasonable and briefly explain why. Bullet points only (use the \* or \- symbol), no essay.
 
+#### Solution
+
 ```{r}
 #| label: ex1-4
 str(df)
@@ -89,10 +98,14 @@ str(df_clean)
 summary(df_clean)
 ```
 
-## Comments
+##### Comments/Bullet points
 
-* length had to be converted to numerical (from character)
-* sex should be a factor
-* factors and logicals are displayed differently (counts)
+* Variable length had to be converted to numerical (from character), especially for computations
+* Variable sex is categorical, hence a factor (without any order)
+* Factors and logicals are displayed differently: counts instead of the "big 5"
+
+##### Bonus
+
+If you know that `FALSE` and `TRUE` are internally represented as `0` and `1`. What is the number of healthy mice (computed)?
 
 [^1]: Check the .qmd file on how to have inline code!

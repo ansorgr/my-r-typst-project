@@ -1,4 +1,4 @@
-#let article(
+  #let article(
 
   title: "Book title",
   author: "Author",
@@ -7,7 +7,7 @@
 
   // The paper size to use.
   paper: "a4",
-
+  
   // The book's content.
   body,
 ) = {
@@ -32,14 +32,6 @@
   )
 
   page(align(left + top)[
-    // Position the logo using the `place()` function
-    #place(
-      right, // Align the image to the right of the page
-      dx: 2cm, // Move it 2cm horizontally to the right of the right margin
-      dy: -1cm, // Move it up 1cm from the top margin
-      image("MedNeuro_Logo_digital.png", width: 3cm)
-    )
-
     #h(-1cm)
     #box(
       fill: rgb("#fecfcb"),
@@ -49,16 +41,10 @@
         #text(size: 2.5em)[*#title*]
     ]
     #v(2em, weak: true)
-    // Create a new line for the small labels
-    #text(size: 0.7em, fill: rgb("#9a9a9a"))[AUTHOR] #h(1fr) #text(size: 0.7em, fill: rgb("#9a9a9a"))[PUBLISHED]
-    #v(-0.5em)
-    #text(size: 1em)[#author] #h(1fr) #text(size: 1em)[#date]
-
-    // Insert thin line here
-    #line(length: 100%, stroke: (paint: rgb("#9a9a9a"), thickness: 0.5pt))
-
-    #v(3em, weak: true)
+    // Autor und Datum unter der Box
+    #text(size: 1.3em)[#author] #h(1fr) #text(size: 1.3em)[#date]
 
     #body
   ])
+
 }
