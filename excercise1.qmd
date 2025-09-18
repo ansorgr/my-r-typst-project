@@ -102,7 +102,7 @@ If you know that `FALSE` and `TRUE` are internally represented as `0` and `1`. W
 
 **Solution**
 
-Use the `sum()` function to count all TRUEs in column `healthly` which returns `r sum(df_clean$healthy)` (compare it to the `summary()` output above).
+Use the `sum()` function to count all `TRUE`s in column `healthly` which returns `r sum(df_clean$healthy)` (compare it to the `summary()` output above).
 
 [^1]: Check the .qmd file on how to have inline code!
 [^2]: Min, 25% Qrt, (Median), Mean, 75% Qrt, Max
