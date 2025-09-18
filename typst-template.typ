@@ -3,7 +3,6 @@
   title: "Book title",
   author: "Author",
   date: "1970-01-01",
-  species: "default species",
 
   // The paper size to use.
   paper: "a4",
@@ -40,7 +39,7 @@
       image("MedNeuro_Logo_digital.png", width: 3cm)
     )
 
-    #h(-1cm)
+    #h(-1cm) // ident to the left (into the red box)
     #box(
       fill: rgb("#fecfcb"),
       width: 1fr,
@@ -55,7 +54,7 @@
     #text(size: 1em)[#author] #h(1fr) #text(size: 1em)[#date]
 
     // Insert thin line here
-    #line(length: 100%, stroke: (paint: rgb("#9a9a9a"), thickness: 0.5pt))
+    #line(length: 100%, stroke: (paint: rgb("#9a9a9a"), thickness: 0.2pt))
 
     #v(3em, weak: true)
 

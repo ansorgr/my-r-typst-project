@@ -31,9 +31,7 @@ e <- c(TRUE, FALSE, TRUE, TRUE, FALSE) # healthy mouse
 df <- data.frame(a=a, b=b, c=c, d=d, e=e)
 ```
 
-1.  Which vectors (or columns of the data frame) need some work-over? If so, please write the correct code (_hint_: try to figure this out by looking at its structure; recall coercion and accessing elements of vectors, and factors. Think about on how to assign new a value to a particular element of a vector, e.g. my_example_vector[5].
-
-#### Solution
+1.  Which vectors (or columns of the data frame) need some work-over? If so, please write the correct code. _Hint_: try to figure this out by looking at its structure; recall coercion and accessing elements of vectors, and factors. Think about on how to assign new a value to a particular element of a vector, e.g. my_example_vector[5]. **Solution**:
 
 ```{r}
 #| label: ex1-1a
@@ -55,9 +53,7 @@ d <- as.factor(d)
 d
 ```
 
-2.  Add all vectors to a new data frame `df_clean` with proper/meaningful headers (instead of a,..., e)
-
-#### Solution
+2.  Add all vectors to a new data frame `df_clean` with proper/meaningful headers (instead of a,..., e). **Solution**:
 
 ```{r}
 #| label: ex1-2
@@ -65,9 +61,7 @@ df_clean <- data.frame(ID=a, licks=b, length=c, sex=d, healthy=e)
 df_clean
 ```
 
-3.  What is the mean of the length of the mice? _Hint_: you could use the `mean()` function. What is the median?
-
-#### Solution
+3.  What is the mean of the length of the mice? _Hint_: you could use the `mean()` function. What is the median? **Solution**:
 
 ```{r}
 #| label: ex1-3
@@ -85,9 +79,7 @@ median <- median(df_clean$length)
 
 > The mean length of the mice is `r mean` and the median is `r median`.[^1]
 
-4.  Look at the structure **and** summary if your cleaned-up data is reasonable and briefly explain why. Bullet points only (use the \* or \- symbol), no essay.
-
-#### Solution
+4.  Look at the structure **and** summary if your cleaned-up data is reasonable and briefly explain why. Bullet points only (use the \* or \- symbol), no essay. **Solution**:
 
 ```{r}
 #| label: ex1-4
@@ -98,14 +90,19 @@ str(df_clean)
 summary(df_clean)
 ```
 
-##### Comments/Bullet points
+##### Comments/Bullet points ()
 
 * Variable length had to be converted to numerical (from character), especially for computations
 * Variable sex is categorical, hence a factor (without any order)
-* Factors and logicals are displayed differently: counts instead of the "big 5"
+* Factors and logicals are displayed differently: counts instead of the "big 5"[^2]
 
 ##### Bonus
 
 If you know that `FALSE` and `TRUE` are internally represented as `0` and `1`. What is the number of healthy mice (computed)?
 
+**Solution**
+
+Use the `sum()` function to count all TRUEs in column `healthly` which returns `r sum(df_clean$healthy)` (compare it to the `summary()` output above).
+
 [^1]: Check the .qmd file on how to have inline code!
+[^2]: Min, 25% Qrt, (Median), Mean, 75% Qrt, Max
