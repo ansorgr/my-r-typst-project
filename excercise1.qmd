@@ -31,13 +31,23 @@ e <- c(TRUE, FALSE, TRUE, TRUE, FALSE) # healthy mouse
 df <- data.frame(a=a, b=b, c=c, d=d, e=e)
 ```
 
-1.  Which vectors (or columns of the data frame) need some work-over? If so, please write the correct code. _Hint_: try to figure this out by looking at its structure; recall coercion and accessing elements of vectors, and factors. Think about on how to assign new a value to a particular element of a vector, e.g. my_example_vector[5]. **Solution**:
+## Question 1 {#sec-q1}
+Which vectors (or columns of the data frame) need some work-over? If so, please write the correct code. _Hint_: try to figure this out by looking at its structure; recall coercion and accessing elements of vectors, and factors. Think about on how to assign new a value to a particular element of a vector, e.g. `my_example_vector[1]`.
+
+### Solution
+Vector `c` has quotation marks and looks suspicious (the code coloring above gives it already away). The length should be a decimal number. Let's check the data type to be sure. For convenience, we are using the vectors directly since we already have them. Otherwise, with the `data.frame`, it's `df$c` for accessing or manipulation.
+
+#### Length vector {#sec-ex1-1a}
 
 ```{r}
 #| label: ex1-1a
 class(c)
 c
 ```
+
+As assumed, it is of type `character`. We need to transform the values to decimal numbers, `numeric` in R.
+
+#### Length vector (2) {#sec-ex1-1b}
 
 ```{r}
 #| label: ex1-1b
@@ -46,40 +56,77 @@ c
 class(c)
 ```
 
+Perfect! Our `length` vector is now of type `numeric`. Vector `sex` is a category with Female and Male as possible categories. Since categories are factors in R, we coerce using the `as.factor()` function. Note that this is, strictly speaking, *not* necessary in our example. However, in some cases, factors behave differently then characters or strings in computations and plotting.
+
+#### Sex vector {#sec-ex1-1c}
+
 ```{r}
 #| label: ex1-1c
+d <- as.factor(d)
+d
+```
+
+Wait, the levels indicate all available categories. There are three of them, obviously due to a spelling mistake. Let's correct it and run it again.
+
+#### Sex vector (2) {#sec-ex1-1d}
+
+```{r}
+#| label: ex1-1d
 d[5] <- "Male" # was misspelled as "Maile"
 d <- as.factor(d)
 d
 ```
 
-2.  Add all vectors to a new data frame `df_clean` with proper/meaningful headers (instead of a,..., e). **Solution**:
+The levels haven't changed although we corrected the spelling. What happened? Since `d` already had levels assigned, we also need to re-assign the levels.
+
+#### Sex vector (3) {#sec-ex1-1e}
 
 ```{r}
+#| label: ex1-1e
+d <- factor(d, levels = c("Female", "Male"))
+d
+```
+
+It would have been easier to first correct the spelling and then make it a factor (i.e. just running @sec-ex1-1d). Note that we must use the `factor()` function to set the levels.
+
+If you have an *ordered* factor, you can also change the order like this (there is, however, an entire package for it, `forcats`, which is part of the `tidyverse` package we will use later).
+
+## Question 2 {#sec-q2}
+Add all vectors to a new data frame `df_clean` with proper/meaningful headers (instead of `a` ... `e`).
+
+### Solution
+You can simply use column names you want to use and assign the vectors `a` ... `e`. Best practice is to avoid spaces. Use a single word or combine words with _ (underscore) or - (dash, *not very common*!): `length_cm` or `licks_hr`. In this example, adding the unit may enhance the readability of your data (for humans).
+
+If you get data with messy headers, the `janitor` package helps.
+
+#### Clean data frame
+```{r}
 #| label: ex1-2
-df_clean <- data.frame(ID=a, licks=b, length=c, sex=d, healthy=e)
+df_clean <- data.frame(ID=a, licks_hr=b, length_cm=c, sex=d, healthy=e)
 df_clean
 ```
 
-3.  What is the mean of the length of the mice? _Hint_: you could use the `mean()` function. What is the median? **Solution**:
+## Question 3 {#sec-q3}
+What is the mean of the length of the mice? _Hint_: you could use the `mean()` function. What is the median?
+
+### Solution
+We can simply run the `mean()` and `median()` functions on the `length` column.
 
 ```{r}
 #| label: ex1-3
-mean(df_clean$length)
-median(df_clean$length)
+mean(df_clean$length_cm)
+median(df_clean$length_cm)
 ```
 
-```{r}
-#| label: ex1-3b
-#| echo: false
-#| results: false
-mean <- mean(df_clean$length)
-median <- median(df_clean$length)
-```
+Inline computations are also possible if you want to insert values or the result of a function in a text:
 
-> The mean length of the mice is `r mean` and the median is `r median`.[^1]
+> The mean length of the mice is `r mean(df_clean$length_cm)` and the median is `r median(df_clean$length_cm)`.[^1]
 
-4.  Look at the structure **and** summary if your cleaned-up data is reasonable and briefly explain why. Bullet points only (use the \* or \- symbol), no essay. **Solution**:
+## Question 4 {#sec-q4}
+Look at the structure **and** summary if your cleaned-up data is reasonable and briefly explain why. Bullet points only (use the \* or \- symbol), no essay.
+
+### Solution
+Review the structure and summary from @sec-q1 and compare it with our cleaned data frame (@sec-q2). If you want to check for data types, `str()` is probably the better and more compact choice. When we start working with the `tidyverse` package, there is an advanced data.frame (`tibble`) which prints the data types below the column names.
 
 ```{r}
 #| label: ex1-4
@@ -90,19 +137,17 @@ str(df_clean)
 summary(df_clean)
 ```
 
-##### Comments/Bullet points ()
+### Comments/Bullet points
 
-* Variable length had to be converted to numerical (from character), especially for computations
-* Variable sex is categorical, hence a factor (without any order)
-* Factors and logicals are displayed differently: counts instead of the "big 5"[^2]
+* Variable/vector `length` had to be converted to numerical (from character)
+* Variable/vector `sex` is categorical, hence a factor (without any order)
+* Factors and logicals are displayed differently: counts instead of the descriptive statistics [^2]
 
-##### Bonus
+### Bonus
 
 If you know that `FALSE` and `TRUE` are internally represented as `0` and `1`. What is the number of healthy mice (computed)?
-
-**Solution**
 
 Use the `sum()` function to count all `TRUE`s in column `healthly` which returns `r sum(df_clean$healthy)` (compare it to the `summary()` output above).
 
 [^1]: Check the .qmd file on how to have inline code!
-[^2]: Min, 25% Qrt, (Median), Mean, 75% Qrt, Max
+[^2]: Min, 25% Qrt, Median, Mean, 75% Qrt, Max
