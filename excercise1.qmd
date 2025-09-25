@@ -37,7 +37,7 @@ Which vectors (or columns of the data frame) need some work-over? If so, please 
 ### Solution
 Vector `c` has quotation marks and looks suspicious (the code coloring above gives it already away). The length should be a decimal number. For convenience, we are using the vectors directly since we already have them. Otherwise, with the `data.frame`, it's `df$c` for accessing or manipulation. What about vector `d`? Isn't it a category (factor in R)?
 
-Let's check the data type of `c` to be sure.
+Let's check the data type of `c` to be sure first.
 
 #### Length vector {#sec-ex1-1a}
 
@@ -58,9 +58,9 @@ c
 class(c)
 ```
 
-Perfect! Our `length` vector is now of type `numeric`.
+Perfect! Our `length` vector is now of type `numeric`. We can now apply mathemical or statistical functions to it.
 
-Vector `d` is a category with Female and Male with (two) possible values. Since categories are factors in R, we coerce using the `as.factor()` function. Note that this is, strictly speaking, *not* necessary in our example. However, in some cases, factors behave differently then characters or strings in computations and plotting.
+Vector `d` is a category with Female and Male and (two) possible values. Since categories are factors in R, we coerce using the `as.factor()` function. Note that this is, strictly speaking, *not* necessary in our example. However, in some cases, factors behave differently then characters or strings in computations and plotting.
 
 #### Sex vector {#sec-ex1-1c}
 
@@ -91,7 +91,7 @@ d <- factor(d, levels = c("Female", "Male"))
 d
 ```
 
-It would have been easier to first correct the spelling and then make it a factor (i.e. just running (2)). Note that we _must_ use the `factor()` function to set the levels.
+It would have been easier to first correct the spelling (cleaning the data) and then make it a factor (i.e. just running (2)). Note that we _must_ use the `factor()` function to set the levels.
 
 If you have an *ordered* factor, you can also change the order like this (there is, however, an entire package for it, `forcats`, which is part of the `tidyverse` package we will use later).
 
