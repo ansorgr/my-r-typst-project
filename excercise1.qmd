@@ -35,7 +35,9 @@ df <- data.frame(a=a, b=b, c=c, d=d, e=e)
 Which vectors (or columns of the data frame) need some work-over? If so, please write the correct code. _Hint_: try to figure this out by looking at its structure; recall coercion and accessing elements of vectors, and factors. Think about on how to assign new a value to a particular element of a vector, e.g. `my_example_vector[1]`.
 
 ### Solution
-Vector `c` has quotation marks and looks suspicious (the code coloring above gives it already away). The length should be a decimal number. Let's check the data type to be sure. For convenience, we are using the vectors directly since we already have them. Otherwise, with the `data.frame`, it's `df$c` for accessing or manipulation.
+Vector `c` has quotation marks and looks suspicious (the code coloring above gives it already away). The length should be a decimal number. For convenience, we are using the vectors directly since we already have them. Otherwise, with the `data.frame`, it's `df$c` for accessing or manipulation. What about vector `d`? Isn't it a category (factor in R)?
+
+Let's check the data type of `c` to be sure.
 
 #### Length vector {#sec-ex1-1a}
 
@@ -56,7 +58,9 @@ c
 class(c)
 ```
 
-Perfect! Our `length` vector is now of type `numeric`. Vector `sex` is a category with Female and Male as possible categories. Since categories are factors in R, we coerce using the `as.factor()` function. Note that this is, strictly speaking, *not* necessary in our example. However, in some cases, factors behave differently then characters or strings in computations and plotting.
+Perfect! Our `length` vector is now of type `numeric`.
+
+Vector `d` is a category with Female and Male with (two) possible values. Since categories are factors in R, we coerce using the `as.factor()` function. Note that this is, strictly speaking, *not* necessary in our example. However, in some cases, factors behave differently then characters or strings in computations and plotting.
 
 #### Sex vector {#sec-ex1-1c}
 
@@ -87,7 +91,7 @@ d <- factor(d, levels = c("Female", "Male"))
 d
 ```
 
-It would have been easier to first correct the spelling and then make it a factor (i.e. just running @sec-ex1-1d). Note that we must use the `factor()` function to set the levels.
+It would have been easier to first correct the spelling and then make it a factor (i.e. just running (2)). Note that we _must_ use the `factor()` function to set the levels.
 
 If you have an *ordered* factor, you can also change the order like this (there is, however, an entire package for it, `forcats`, which is part of the `tidyverse` package we will use later).
 
@@ -126,7 +130,7 @@ Inline computations are also possible if you want to insert values or the result
 Look at the structure **and** summary if your cleaned-up data is reasonable and briefly explain why. Bullet points only (use the \* or \- symbol), no essay.
 
 ### Solution
-Review the structure and summary from @sec-q1 and compare it with our cleaned data frame (@sec-q2). If you want to check for data types, `str()` is probably the better and more compact choice. When we start working with the `tidyverse` package, there is an advanced data.frame (`tibble`) which prints the data types below the column names.
+Review the structure and summary from Question 1 and compare it with our cleaned data frame (Question 2). If you want to check for data types, `str()` is probably the better and more compact choice. When we start working with the `tidyverse` package, there is an advanced data.frame (`tibble`) which prints the data types below the column names.
 
 ```{r}
 #| label: ex1-4

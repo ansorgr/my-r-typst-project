@@ -12,7 +12,7 @@
 ) = {
   // Set the document's metadata.
   set document(title: title, author: author)
-  set heading(numbering: "1.")
+  // set heading(numbering: "1.")
   // Set the body font.
   set text(font: "Lato", fill: rgb("#65656e"))
 
