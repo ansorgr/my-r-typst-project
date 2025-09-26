@@ -1,6 +1,6 @@
 ---
 title: "Data types and structures"
-author: Ralf Ansorg
+author: "Ralf Ansorg"
 date: "`r Sys.Date()`"
 date-format: "DD MMMM YYYY"
 format:
@@ -32,7 +32,7 @@ df <- data.frame(a=a, b=b, c=c, d=d, e=e)
 ```
 
 ## Question 1 {#sec-q1}
-Which vectors (or columns of the data frame) need some work-over? If so, please write the correct code. _Hint_: try to figure this out by looking at its structure; recall coercion and accessing elements of vectors, and factors. Think about on how to assign new a value to a particular element of a vector, e.g. `my_example_vector[1]`.
+Which vectors (or columns of the data frame) need some work-over? If so, please write the correct code. _Hint_: try to figure this out by looking at its structure or class; recall coercion and accessing elements of vectors, and factors. Think about on how to assign new a value to a particular element of a vector, e.g. `my_example_vector[1]`.
 
 ### Solution
 Vector `c` has quotation marks and looks suspicious (the code coloring above gives it already away). The length should be a decimal number. For convenience, we are using the vectors directly since we already have them. Otherwise, with the `data.frame`, it's `df$c` for accessing or manipulation. What about vector `d`? Isn't it a category (factor in R)?
@@ -60,7 +60,7 @@ class(c)
 
 Perfect! Our `length` vector is now of type `numeric`. We can now apply mathemical or statistical functions to it.
 
-Vector `d` is a category with Female and Male and (two) possible values. Since categories are factors in R, we coerce using the `as.factor()` function. Note that this is, strictly speaking, *not* necessary in our example. However, in some cases, factors behave differently then characters or strings in computations and plotting.
+Vector `d` is rather a categorical variable with Female and Male as the only possible values. Since categories are factors in R, we coerce the vector using the `as.factor()` function. Note that this is, strictly speaking, *not* necessary in our example. However, in some cases, factors behave differently then characters or strings in computations (including statistical tests) and plotting.
 
 #### Sex vector {#sec-ex1-1c}
 
@@ -81,7 +81,7 @@ d <- as.factor(d)
 d
 ```
 
-The levels haven't changed although we corrected the spelling. What happened? Since `d` already had levels assigned, we also need to re-assign the levels.
+The levels haven't changed although we corrected the spelling. What happened? Since `d` already had levels assigned when we coerced it to a factor, we also need to re-assign the levels[^0].
 
 #### Sex vector (3) {#sec-ex1-1e}
 
@@ -91,15 +91,22 @@ d <- factor(d, levels = c("Female", "Male"))
 d
 ```
 
-It would have been easier to first correct the spelling (cleaning the data) and then make it a factor (i.e. just running (2)). Note that we _must_ use the `factor()` function to set the levels.
+It would have been easier to first correct the spelling (cleaning the data) and then make it a factor (i.e. just running (2)). Note that we _must_ use the `factor()` function to set the levels, it is not a parameter of the `as.factor()` function!
 
 If you have an *ordered* factor, you can also change the order like this (there is, however, an entire package for it, `forcats`, which is part of the `tidyverse` package we will use later).
+
+If you used the `str()` function for the data frame, you saw the incorrect data types at a glance, that is, c is of type `character` (chr — and also the quotation marks) and e of type `logical` (logi).
+
+```{r}
+#| label: ex1-str
+str(df)
+```
 
 ## Question 2 {#sec-q2}
 Add all vectors to a new data frame `df_clean` with proper/meaningful headers (instead of `a` ... `e`).
 
 ### Solution
-You can simply use column names you want to use and assign the vectors `a` ... `e`. Best practice is to avoid spaces. Use a single word or combine words with _ (underscore) or - (dash, *not very common*!): `length_cm` or `licks_hr`. In this example, adding the unit may enhance the readability of your data (for humans).
+You can simply use column names you want to use and assign the vectors `a` ... `e`. Best practice is to avoid spaces. Use a single word or combine words with _ (underscore): `length_cm` or `licks_hr`. In this example, adding the unit(s) may even enhance the readability of your data (for humans).
 
 If you get data with messy headers, the `janitor` package helps.
 
@@ -122,15 +129,15 @@ mean(df_clean$length_cm)
 median(df_clean$length_cm)
 ```
 
-Inline computations are also possible if you want to insert values or the result of a function in a text:
+Inline computations are also possible if you want to insert values or the result of a function in your text:
 
 > The mean length of the mice is `r mean(df_clean$length_cm)` and the median is `r median(df_clean$length_cm)`.[^1]
 
 ## Question 4 {#sec-q4}
-Look at the structure **and** summary if your cleaned-up data is reasonable and briefly explain why. Bullet points only (use the \* or \- symbol), no essay.
+Look at the structure **and** summary if your cleaned-up data is reasonable and briefly explain why (what you did). Bullet points only (use the \* or \- symbol), no essay.
 
 ### Solution
-Review the structure and summary from Question 1 and compare it with our cleaned data frame (Question 2). If you want to check for data types, `str()` is probably the better and more compact choice. When we start working with the `tidyverse` package, there is an advanced data.frame (`tibble`) which prints the data types below the column names.
+Review the structure and summary from Question 1 and compare it to our cleaned data frame (Question 2). If you want to check for data types, `str()` is probably the better and more compact choice. When we start working with the `tidyverse` package, there is an advanced data.frame (called a `tibble`) which prints the data types below the column names.
 
 ```{r}
 #| label: ex1-4
@@ -153,5 +160,6 @@ If you know that `FALSE` and `TRUE` are internally represented as `0` and `1`. W
 
 Use the `sum()` function to count all `TRUE`s in column `healthly` which returns `r sum(df_clean$healthy)` (compare it to the `summary()` output above).
 
-[^1]: Check the .qmd file on how to have inline code!
+[^0]: Or remove variable d from the memory, which is rather complicated.
+[^1]: Check the .qmd file on how to have inline code! The `>` is for empasis.
 [^2]: Min, 25% Qrt, Median, Mean, 75% Qrt, Max
