@@ -8,6 +8,10 @@ format:
     template-partials: 
       - typst-show.typ
       - typst-template.typ
+knitr: 
+  opts_chunk: 
+    collapse: true
+    df-print: paged
 echo: true
 results: true
 warning: false

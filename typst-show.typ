@@ -8,7 +8,4 @@ $endif$
 $if(date)$
   date: "$date$",
 $endif$
-$if(params.poi)$
-  poi: "$params.poi$",
-$endif$
 )
