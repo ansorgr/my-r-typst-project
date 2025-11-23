@@ -9,23 +9,26 @@ format:
       - typst-show.typ
       - typst-template.typ
 ---
+
 # Sunday, 23 November 2025, 08:54 am
 
 ## General Notes
-- :LiPersonStanding: 8:45
-- :LiForkKnife: desayuno (2 Knäckebrot) (09:28)
-- M 12-17:30 (18:38)
-- :LiGlassWater: (19:50)
-- :LiForkKnife: cenar (un panecillo) (20:20)
-- :LiGlassWater: (20:20)
-- :LiGlassWater: (21:59)
-- :LiGlassWater: (22:17)
-- :LiBatteryCharging: A7 (22:21)
+
+-   :LiPersonStanding: 8:45
+-   :LiForkKnife: desayuno (2 Knäckebrot) (09:28)
+-   M 12-17:30 (18:38)
+-   :LiGlassWater: (19:50)
+-   :LiForkKnife: cenar (un panecillo) (20:20)
+-   :LiGlassWater: (20:20)
+-   :LiGlassWater: (21:59)
+-   :LiGlassWater: (22:17)
+-   :LiBatteryCharging: A7 (22:21)
 
 ## Lists and Tasks
 
 ### Deadlines
-```base
+
+``` base
 formulas:
   Days: deadline.relative()
   overdue: if(formula.Days.toString().contains("ago"), "!!!", "~")
@@ -63,10 +66,11 @@ views:
       file.folder: 159
   - type: table
     name: View
-
 ```
+
 ### Notes created today
-```base
+
+``` base
 formulas:
   Days: deadline.relative()
 properties:
@@ -98,10 +102,11 @@ views:
     columnSize:
       file.name: 243
       file.folder: 239
-
 ```
+
 ### Notes last touched today
-```base
+
+``` base
 formulas:
   Days: deadline.relative()
 properties:
@@ -133,18 +138,23 @@ views:
     columnSize:
       file.name: 243
       file.folder: 239
-
 ```
+
 ### Open tasks
+
 #### with due date
-```tasks
+
+``` tasks
 has due date
 not done
 ```
+
 #### without due date
-```tasks
+
+``` tasks
 has tags
 not done
 sort by created
 ```
+
 *updated: `=dateformat(this.file.mtime, "DDDD, hh:mm a")`*
