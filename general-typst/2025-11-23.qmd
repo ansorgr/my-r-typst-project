@@ -1,0 +1,150 @@
+---
+title: "2025-11-23"
+author: "Ralf Ansorg"
+date: "2025-11-23 08:54"
+date-format: "DD MMMM YYYY"
+format:
+  typst:
+    template-partials: 
+      - typst-show.typ
+      - typst-template.typ
+---
+# Sunday, 23 November 2025, 08:54 am
+
+## General Notes
+- :LiPersonStanding: 8:45
+- :LiForkKnife: desayuno (2 Knäckebrot) (09:28)
+- M 12-17:30 (18:38)
+- :LiGlassWater: (19:50)
+- :LiForkKnife: cenar (un panecillo) (20:20)
+- :LiGlassWater: (20:20)
+- :LiGlassWater: (21:59)
+- :LiGlassWater: (22:17)
+- :LiBatteryCharging: A7 (22:21)
+
+## Lists and Tasks
+
+### Deadlines
+```base
+formulas:
+  Days: deadline.relative()
+  overdue: if(formula.Days.toString().contains("ago"), "!!!", "~")
+properties:
+  file.name:
+    displayName: File
+  file.mtime:
+    displayName: Modified today
+  file.folder:
+    displayName: Folder
+  note.deadline:
+    displayName: Deadline
+  formula.Days:
+    displayName: Due...
+  formula.overdue:
+    displayName: Prio
+views:
+  - type: table
+    name: Default view
+    filters:
+      and:
+        - "!deadline.isEmpty()"
+        - status != true
+    order:
+      - file.name
+      - deadline
+      - formula.Days
+      - formula.overdue
+      - tags
+    sort:
+      - property: deadline
+        direction: ASC
+    columnSize:
+      file.name: 213
+      file.folder: 159
+  - type: table
+    name: View
+
+```
+### Notes created today
+```base
+formulas:
+  Days: deadline.relative()
+properties:
+  file.name:
+    displayName: File
+  file.ctime:
+    displayName: Created
+  file.folder:
+    displayName: Folder
+  note.creation date:
+    displayName: Created
+  note.deadline:
+    displayName: Deadline
+  formula.Days:
+    displayName: Something due...
+views:
+  - type: table
+    name: Default view
+    filters:
+      and:
+        - file.ctime == this.file.name
+    order:
+      - file.name
+      - file.folder
+      - formula.Days
+    sort:
+      - property: creation date
+        direction: DESC
+    columnSize:
+      file.name: 243
+      file.folder: 239
+
+```
+### Notes last touched today
+```base
+formulas:
+  Days: deadline.relative()
+properties:
+  file.name:
+    displayName: File
+  file.ctime:
+    displayName: Created
+  file.folder:
+    displayName: Folder
+  note.creation date:
+    displayName: Created
+  note.deadline:
+    displayName: Deadline
+  formula.Days:
+    displayName: Something due...
+views:
+  - type: table
+    name: Default view
+    filters:
+      and:
+        - file.mtime == this.file.name
+    order:
+      - file.name
+      - file.folder
+      - formula.Days
+    sort:
+      - property: creation date
+        direction: DESC
+    columnSize:
+      file.name: 243
+      file.folder: 239
+
+```
+### Open tasks
+#### with due date
+```tasks
+has due date
+not done
+```
+#### without due date
+```tasks
+has tags
+not done
+sort by created
+```
+*updated: `=dateformat(this.file.mtime, "DDDD, hh:mm a")`*

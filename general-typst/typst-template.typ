@@ -2,9 +2,13 @@
 
 #let article(
 
-  title: "Book title",
-  author: "Author",
-  date: "1970-01-01",
+  title: none,
+  author: none,
+  date: none,
+
+  // Arguments to receive the translated labels
+  author-label: none,
+  published-label: none,
 
   // The paper size to use.
   paper: "a4",
@@ -14,7 +18,7 @@
 ) = {
   // Set the document's metadata.
   set document(title: title, author: author)
-  // set heading(numbering: "1.")
+  set heading(numbering: "1.")
   // Set the body font.
   set text(font: "Lato", fill: rgb("#65656e"))
 
@@ -24,26 +28,18 @@
     background: place(
         top,
         rect(
-            width: 2cm,
+            width: 1cm,
             height: 100%,
-            fill: rgb("#ff546c")
+            fill: rgb("#0d0486ff")
         )
     ),
     margin: (bottom: 1cm, top: 1cm, left: 2.5cm, right: 2.5cm),
   )
 
   page(align(left + top)[
-    // Position the logo using the `place()` function
-    #place(
-      right, // Align the image to the right of the page
-      dx: 2cm, // Move it 2cm horizontally to the right of the right margin
-      dy: -1cm, // Move it up 1cm from the top margin
-      image("MedNeuro_Logo_digital.png", width: 3cm)
-    )
-
-    #h(-1cm) // ident to the left (into the red box)
+    #h(-1.9cm) // ident to the left (into the red box)
     #box(
-      fill: rgb("#fecfcb"),
+      fill: rgb("#cbddfeff"),
       width: 1fr,
       inset: 15pt,
      )[
@@ -52,6 +48,7 @@
     #v(2em, weak: true)
     // Create a new line for the small labels
     #text(size: 0.7em, fill: rgb("#9a9a9a"))[AUTHOR] #h(1fr) #text(size: 0.7em, fill: rgb("#9a9a9a"))[PUBLISHED]
+    //#text(size: 0.7em, fill: rgb("#9a9a9a"))[#author-label] #h(1fr) #text(size: 0.7em, fill: rgb("#9a9a9a"))[#published-label]
     #v(-0.5em)
     #text(size: 1em)[#author] #h(1fr) #text(size: 1em)[#date]
 
